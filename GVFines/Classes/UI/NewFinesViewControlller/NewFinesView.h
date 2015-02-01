@@ -27,6 +27,13 @@
     NSInteger selectedPavilionFineDepartmentIndex;
     NSInteger selectedPavilionFineDescriptionIndex;
     
+    NSInteger totalAttachmentsToUpload;
+    NSInteger attachmentsReturned;
+    BOOL isUploadingAttachments;
+    NSArray *imagesArray;
+    NSMutableArray *failedImagedArray;
+    NSString *attachmentParentId;
+    
     BOOL isLoadingBusinessCategories;
     BOOL isLoadingSubCategories;
     BOOL isLoadingRecordTypes;
@@ -45,8 +52,6 @@
     
     NSMutableArray *pavilionFineDepartmentStringArray;
     NSMutableArray *pavilionFineTypeFilteredArray;
-    
-    NSArray *imagesArray;
     
     NSString *caseNumber;
 }

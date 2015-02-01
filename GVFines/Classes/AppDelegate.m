@@ -36,13 +36,16 @@
 #import "CustomIOS7AlertView.h"
 
 // Fill these in when creating a new Connected Application on Force.com
-//Sandbox
-//static NSString * const RemoteAccessConsumerKey = @"3MVG98RqVesxRgQ73Uavs41TO72nkxh5FpVP1T1mSjgNHYUVzYbsrT90FgJRomGIiRRHC.KBSqj2FhVXUwzng";
-//static NSString * const LoginHostUrl            = @"test.salesforce.com";
 
-//Production
+/* Sandbox
+static NSString * const RemoteAccessConsumerKey = @"3MVG98RqVesxRgQ73Uavs41TO72nkxh5FpVP1T1mSjgNHYUVzYbsrT90FgJRomGIiRRHC.KBSqj2FhVXUwzng";
+static NSString * const LoginHostUrl            = @"test.salesforce.com";
+//*/
+
+//*Production
 static NSString * const RemoteAccessConsumerKey = @"3MVG9WtWSKUDG.x6f6FgsWBz5WlO0gvrOhm8ndYZ7XVuj2Jung8zHIaNMyEn5nja9uyVUuSdFQ3z_imegYg0b";
 static NSString * const LoginHostUrl            = @"login.salesforce.com";
+//*/
 
 static NSString * const OAuthRedirectURI        = @"gvfines://auth/success";
 

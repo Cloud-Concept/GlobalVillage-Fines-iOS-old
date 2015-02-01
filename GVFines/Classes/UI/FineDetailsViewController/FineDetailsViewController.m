@@ -10,6 +10,7 @@
 #import "Fine.h"
 #import "HelperClass.h"
 #import "SFRestRequest.h"
+#import "SFUserAccountManager.h"
 
 @interface FineDetailsViewController ()
 
@@ -148,10 +149,12 @@
             ownerId = GR1QueueId;
         }
         
+        SFUserAccountManager *accountManager = [SFUserAccountManager sharedInstance];
+        
         SFRestRequest *request = [[SFRestAPI sharedInstance] requestForUpdateWithObjectType:@"Case"
                                                                                    objectId:currentFine.Id
-                                                                                     fields:[NSDictionary dictionaryWithObjects:@[newStatus, ownerId, commetns]
-                                                                                                                        forKeys:@[@"Status", @"OwnerId", @"Comments__c"]]];
+                                                                                     fields:[NSDictionary dictionaryWithObjects:@[newStatus, ownerId, commetns, accountManager.currentUser.credentials.userId]
+                                                                                                                        forKeys:@[@"Status", @"OwnerId", @"Comments__c", @"Latest_Fine_Issuer__c"]]];
         
         [[SFRestAPI sharedInstance] send:request delegate:self];
     }

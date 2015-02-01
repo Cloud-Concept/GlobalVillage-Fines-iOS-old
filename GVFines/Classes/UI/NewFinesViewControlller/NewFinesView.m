@@ -16,7 +16,7 @@
 #import "Fine.h"
 #import "NewFinesTabViewController.h"
 #import "SFDateUtil.h"
-
+#import "SFUserAccountManager.h"
 
 @interface NewFinesView ()
 @property CGPoint scrollViewContentOffset;
@@ -339,20 +339,20 @@
             
             
             existingFine = [[Fine alloc] initFineWithId:[obj objectForKey:@"Id"]
-                                               CaseNumber:[obj objectForKey:@"CaseNumber"]
-                                         BusinessCategory:[[obj objectForKey:@"Account"] objectForKey:@"Name"]
-                                              SubCategory:shopName
-                                          ViolationClause:[obj objectForKey:@"Violation_Clause__c"]
-                                     ViolationDescription:[obj objectForKey:@"Violation_Description__c"]
-                                ViolationShortDescription:[obj objectForKey:@"Violation_Short_Description__c"]
-                                           FineDepartment:[obj objectForKey:@"Fine_Department__c"]
-                                           X1stFineAmount:(NSNumber*)[obj objectForKey:@"X1st_Fine_Amount__c"]
-                                           X2ndFineAmount:(NSNumber*)[obj objectForKey:@"X2nd_Fine_Amount__c"]
-                                                 Comments:[obj objectForKey:@"Comments__c"]
-                                                   Status:[obj objectForKey:@"Status"]
-                                                CreatedBy:[[obj objectForKey:@"CreatedBy"] objectForKey:@"Name"]
-                                              CreatedDate:[obj objectForKey:@"CreatedDate"]
-                                 FineLastStatusUpdateDate:[obj objectForKey:@"Fine_Last_Status_Update_Date__c"]];
+                                             CaseNumber:[obj objectForKey:@"CaseNumber"]
+                                       BusinessCategory:[[obj objectForKey:@"Account"] objectForKey:@"Name"]
+                                            SubCategory:shopName
+                                        ViolationClause:[obj objectForKey:@"Violation_Clause__c"]
+                                   ViolationDescription:[obj objectForKey:@"Violation_Description__c"]
+                              ViolationShortDescription:[obj objectForKey:@"Violation_Short_Description__c"]
+                                         FineDepartment:[obj objectForKey:@"Fine_Department__c"]
+                                         X1stFineAmount:(NSNumber*)[obj objectForKey:@"X1st_Fine_Amount__c"]
+                                         X2ndFineAmount:(NSNumber*)[obj objectForKey:@"X2nd_Fine_Amount__c"]
+                                               Comments:[obj objectForKey:@"Comments__c"]
+                                                 Status:[obj objectForKey:@"Status"]
+                                              CreatedBy:[[obj objectForKey:@"CreatedBy"] objectForKey:@"Name"]
+                                            CreatedDate:[obj objectForKey:@"CreatedDate"]
+                               FineLastStatusUpdateDate:[obj objectForKey:@"Fine_Last_Status_Update_Date__c"]];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -391,10 +391,12 @@
     isSubmitPavilionFine = YES;
     
     NSString *dateInString = [SFDateUtil toSOQLDateTimeString:[NSDate date] isDateTime:true];
+    SFUserAccountManager *accountManager = [SFUserAccountManager sharedInstance];
     
     NSDictionary *fields = [NSDictionary dictionaryWithObjectsAndKeys:
                             selectedPavilionFineObject.Id, @"Pavilion_Fine_Type__c",
                             fineQueueId, @"OwnerId",
+                            accountManager.currentUser.credentials.userId, @"Latest_Fine_Issuer__c",
                             pavilionFineRecordTypeId, @"RecordTypeId",
                             selectedBusinessCategoryId, @"AccountId",
                             selectedSubCategoryId, @"Shop__c",
@@ -407,10 +409,29 @@
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
-- (void)getFineNumberAndPrint:(NSString*) caseId {
+- (void)uploadAttachments:(NSString*)caseId Images:(NSArray*)imagesToUpload{
     [self initializeAndStartActivityIndicatorSpinner];
     
-    for (UIImage *image in imagesArray) {
+    totalAttachmentsToUpload = imagesToUpload.count;
+    attachmentsReturned = 0;
+    failedImagedArray = [NSMutableArray new];
+    attachmentParentId = caseId;
+    
+    for (UIImage *image in imagesToUpload) {
+        
+        void (^errorBlock) (NSError*) = ^(NSError *e) {
+            [failedImagedArray addObject:image];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self uploadDidReturn];
+            });
+        };
+        
+        void (^successBlock)(NSDictionary *dict) = ^(NSDictionary *dict) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self uploadDidReturn];
+            });
+        };
         
         UIImage *resizedImage = [HelperClass imageWithImage:image ScaledToSize:CGSizeMake(480, 640)];
         
@@ -424,10 +445,35 @@
                                 caseId, @"ParentId",
                                 string, @"Body",
                                 nil];
-        SFRestRequest *attachmentRequest = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Attachment" fields:fields];
         
-        [[SFRestAPI sharedInstance] send:attachmentRequest delegate:self];
+        isUploadingAttachments = YES;
+        [[SFRestAPI sharedInstance] performCreateWithObjectType:@"Attachment"
+                                                         fields:fields
+                                                      failBlock:errorBlock
+                                                  completeBlock:successBlock];
     }
+}
+
+- (void)uploadDidReturn {
+    attachmentsReturned++;
+    
+    if (attachmentsReturned == totalAttachmentsToUpload) {
+        isUploadingAttachments = NO;
+        [self stopActivityIndicatorSpinner];
+        
+        if (failedImagedArray.count > 0) {
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                             message:@"Uploading the images failed."
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Cancel"
+                                                   otherButtonTitles:@"Retry", nil];
+            [alert show];
+        }
+    }
+}
+
+- (void)getFineNumberAndPrint:(NSString*) caseId {
+    [self initializeAndStartActivityIndicatorSpinner];
     
     isLoadingCaseNumber = YES;
     
@@ -446,7 +492,7 @@
 }
 
 - (void)stopActivityIndicatorSpinner {
-    if(isLoadingBusinessCategories || isLoadingSubCategories || isLoadingRecordTypes ||isLoadingCaseNumber || isSubmitPavilionFine || isLoadingPavilionFines || isLoadingQueueId || isCheckingFineExists)
+    if(isLoadingBusinessCategories || isLoadingSubCategories || isLoadingRecordTypes ||isLoadingCaseNumber || isSubmitPavilionFine || isLoadingPavilionFines || isLoadingQueueId || isCheckingFineExists || isUploadingAttachments)
         return;
     
     [self.loadingView setHidden:YES];
@@ -729,7 +775,7 @@
             if(![[obj objectForKey:@"Shop__r"] isKindOfClass:[NSNull class]])
                 shopName = [[obj objectForKey:@"Shop__r"] objectForKey:@"Name"];
             
-                
+            
             newFinesObject = [[Fine alloc] initFineWithId:[obj objectForKey:@"Id"]
                                                CaseNumber:[obj objectForKey:@"CaseNumber"]
                                          BusinessCategory:[[obj objectForKey:@"Account"] objectForKey:@"Name"]
@@ -750,6 +796,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self printReceiptForFine:newFinesObject];
             [self resetAllFields];
+            // TODO: Call Upload attachments method
+            [self uploadAttachments:newFinesObject.Id Images:imagesArray];
         });
     }
     else if([selectQuery rangeOfString:@"FROM Pavilion_Fine_Type__c"].location != NSNotFound)
@@ -828,6 +876,17 @@
 
 - (void)closeFineDetailsPopup {
     [self.fineDetailspopover dismissPopoverAnimated:YES];
+}
+
+#pragma UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0)
+        return;
+    
+    if (buttonIndex == 1) {
+        [self uploadAttachments:attachmentParentId Images:failedImagedArray];
+    }
+    
 }
 
 @end

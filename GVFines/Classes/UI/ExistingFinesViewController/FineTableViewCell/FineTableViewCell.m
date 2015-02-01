@@ -31,10 +31,15 @@
     [self.commentsLabel setText:fineObject.Comments];
     [self.statusLabel setText:fineObject.Status];
     
-    if ([fineObject isUrgent])
+    if ([fineObject isUrgent] &&
+        ![fineObject.Status isEqualToString:@"Rectified"] &&
+        ![fineObject.Status isEqualToString:@"Fine Rejected"])
+    {
         [self.importantIconImageView setHidden:NO];
-    else
+    }
+    else {
         [self.importantIconImageView setHidden:YES];
+    }
     
     [HelperClass setStatusBackground:fineObject ImageView:self.statusImageView];
 }
