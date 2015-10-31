@@ -30,6 +30,7 @@
     [self.shortDescriptionLabel setText:fineObject.ViolationShortDescription];
     [self.commentsLabel setText:fineObject.Comments];
     [self.statusLabel setText:fineObject.Status];
+    [self.fineNumberLabel setText:fineObject.CaseNumber];
     
     if ([fineObject isUrgent] &&
         ![fineObject.Status isEqualToString:@"Rectified"] &&

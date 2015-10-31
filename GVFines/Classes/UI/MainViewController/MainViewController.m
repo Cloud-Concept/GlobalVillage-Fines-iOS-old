@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "NewFinesTabViewController.h"
 #import "ExistingFinesViewController.h"
+#import "ExistingCasesViewController.h"
 #import "HelperClass.h"
 #import <SalesforceSDKCore/SFAuthenticationManager.h>
 
@@ -33,6 +34,7 @@
     [self centerImageAndTitle:self.finesNewButton];
     [self centerImageAndTitle:self.finesOldButton];
     [self centerImageAndTitle:self.logoutButton];
+    [self centerImageAndTitle:self.casesOldButton];
     
     [self activateNewFineTab];
     
@@ -71,12 +73,24 @@
 
 - (void)activateNewFineTab {
     [self removeContainerViewSubViews];
-    
+    newFinesTabViewController = nil;
     existingFinesViewController = nil;
     newFinesTabViewController = [[NewFinesTabViewController alloc] initWithNibName:nil bundle:nil];
     newFinesTabViewController.mainViewController = self;
     [self.containerView addSubview:newFinesTabViewController.view];
     [self.finesNewButton setSelected:YES];
+    [self.finesOldButton setSelected:NO];
+    [self.casesOldButton setSelected:NO];
+}
+
+- (void)activateOldCaseTab{
+    [self removeContainerViewSubViews];
+    newFinesTabViewController = nil;
+    existingFinesViewController = nil;
+    existingCasesViewController = [[ExistingCasesViewController alloc] initWithNibName:nil bundle:nil];
+    [self.containerView addSubview:existingCasesViewController.view];
+    [self.casesOldButton setSelected:YES];
+    [self.finesNewButton setSelected:NO];
     [self.finesOldButton setSelected:NO];
 }
 
@@ -88,6 +102,7 @@
     [self.containerView addSubview:existingFinesViewController.view];
     [self.finesNewButton setSelected:NO];
     [self.finesOldButton setSelected:YES];
+    [self.casesOldButton setSelected:NO];
 }
 
 - (void)centerImageAndTitle:(UIButton*) button {
@@ -125,6 +140,14 @@
         return;
     
     [self activateNewFineTab];
+}
+
+- (IBAction)OldCasesButtonClicked:(id)sender {
+    if (self.casesOldButton.isSelected) 
+        return;
+    
+    
+    [self activateOldCaseTab];
 }
 
 #pragma mark - UIAlertViewDelegate delegate methods

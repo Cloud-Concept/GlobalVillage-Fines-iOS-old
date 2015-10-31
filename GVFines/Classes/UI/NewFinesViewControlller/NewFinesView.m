@@ -35,6 +35,15 @@
     return self;
 }
 
+-(id) initWithFine:(Fine *)fine {
+    if (self = [super init]) {
+        [[NSBundle mainBundle] loadNibNamed:@"NewFinesView" owner:self options:nil];
+        [self addSubview:self.view];
+    }
+    self.fine = fine;
+    return self;
+}
+
 - (void)awakeFromNib {
     //[super awakeFromNib];
     

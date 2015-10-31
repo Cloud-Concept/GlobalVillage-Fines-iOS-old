@@ -79,6 +79,8 @@
 @property (strong, nonatomic) NSMutableArray *subCategoriesArray;
 @property (strong, nonatomic) NSMutableArray *pavilionFineTypeArray;
 
+@property (strong, nonatomic) Fine *fine;
+
 @property (strong, nonatomic) NewFinesTabViewController *parentViewController;
 
 //- (id)initNewFinesViewController;

@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *importantIconImageView;
+@property (weak, nonatomic) IBOutlet UILabel *fineNumberLabel;
 
 - (void)setFine:(Fine*)fine;
 

@@ -1,25 +1,26 @@
 //
-//  ExistingFinesViewController.m
+//  ExistingCasesViewController.m
 //  GVFines
 //
-//  Created by Mina Zaklama on 10/14/14.
-//  Copyright (c) 2014 CloudConcept. All rights reserved.
+//  Created by omer gawish on 9/8/15.
+//  Copyright (c) 2015 CloudConcept. All rights reserved.
 //
 
-#import "ExistingFinesViewController.h"
+#import "ExistingCasesViewController.h"
 #import "SFRestRequest.h"
-#import "FineTableViewCell.h"
 #import "Fine.h"
 #import "BusinessCategory.h"
 #import "SubCategory.h"
 #import "PavilionFineType.h"
 #import "HelperClass.h"
+#import "CaseTableViewCell.h"
+#import "Case.h"
 
-@interface ExistingFinesViewController ()
+@interface ExistingCasesViewController ()
 
 @end
 
-@implementation ExistingFinesViewController
+@implementation ExistingCasesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,8 +28,6 @@
     
     isLoadingBusinessCategories = NO;
     isLoadingSubCategories = NO;
-    isLoadingPavilionFines = NO;
-    isLoadingFines = NO;
     isLoadingQueueId = NO;
     
     showAllFines = NO;
@@ -37,24 +36,26 @@
     
     selectedBusinessCategoryObject = nil;
     selectedSubCategoryObject = nil;
-    selectedPavilionFineDepartment = @"";
-    selectedPavilionFineObject = nil;
     
     fineQueueId = @"";
     GR1QueueId = @"";
     
     selectedBusinessCategoryIndex = -1;
     selectedSubCategoryIndex = -1;
-    selectedPavilionFineDepartmentIndex = -1;
-    selectedPavilionFineDescriptionIndex = -1;
     
     [self loadBusinessCategories];
-    [self loadPavilionFines];
+    //[self loadPavilionFines];
     [self loadFines];
     [self loadPavilionQueueId];
     
     [HelperClass createViewWithShadows:self.filterView];
     [HelperClass createViewWithShadows:self.infringementsView];
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    self.finesTableView.delegate = self;
+    [self.finesTableView setAllowsSelection:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,62 +105,9 @@
     UIButton *senderButton = (UIButton*)sender;
     
     [self.subCategoryPickerPopover presentPopoverFromRect:senderButton.frame inView:senderButton.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-
+    
 }
 
-- (IBAction)departmentButtonClicked:(id)sender {
-    pavilionFineDepartmentStringArray = [[NSMutableArray alloc] init];
-    
-    for (PavilionFineType *pavilionFine in self.pavilionFineTypeArray) {
-        if(![pavilionFineDepartmentStringArray containsObject:pavilionFine.Department])
-            [pavilionFineDepartmentStringArray addObject:pavilionFine.Department];
-        
-    }
-    
-    PopoverPickerViewController *pickerController = [[PopoverPickerViewController alloc] initWithPickerSourceArray:pavilionFineDepartmentStringArray defaultSelectIndex:selectedPavilionFineDepartmentIndex];
-    
-    pickerController.delegate = self;
-    pickerController.noValueMessage = @"No Departments";
-    
-    self.pavilionFineDepartmentPickerPopover = [[UIPopoverController alloc] initWithContentViewController:pickerController];
-    self.pavilionFineDepartmentPickerPopover.popoverContentSize = pickerController.view.frame.size;
-    
-    self.pavilionFineDepartmentPickerPopover.delegate = self;
-    
-    UIButton *senderButton = (UIButton*)sender;
-    
-    [self.pavilionFineDepartmentPickerPopover presentPopoverFromRect:senderButton.frame inView:senderButton.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
-- (IBAction)fineButtonClicked:(id)sender {
-    pavilionFineTypeFilteredArray = [[NSMutableArray alloc] init];
-    
-    if(selectedPavilionFineDepartmentIndex > -1)
-    {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Department = %@", selectedPavilionFineDepartment];
-        pavilionFineTypeFilteredArray = [NSMutableArray arrayWithArray:[self.pavilionFineTypeArray filteredArrayUsingPredicate:predicate]];
-    }
-    
-    NSMutableArray* stringArray = [[NSMutableArray alloc] init];
-    
-    for (PavilionFineType *pavilionFineType in pavilionFineTypeFilteredArray) {
-        [stringArray addObject:pavilionFineType.ShortDescription];
-    }
-    
-    PopoverPickerViewController *pickerController = [[PopoverPickerViewController alloc] initWithPickerSourceArray:stringArray defaultSelectIndex:selectedPavilionFineDescriptionIndex];
-    
-    pickerController.delegate = self;
-    pickerController.noValueMessage = @"No Fines";
-    
-    self.pavilionFineDescriptionPickerPopover = [[UIPopoverController alloc] initWithContentViewController:pickerController];
-    self.pavilionFineDescriptionPickerPopover.popoverContentSize = pickerController.view.frame.size;
-    
-    self.pavilionFineDescriptionPickerPopover.delegate = self;
-    
-    UIButton *senderButton = (UIButton*)sender;
-    
-    [self.pavilionFineDescriptionPickerPopover presentPopoverFromRect:senderButton.frame inView:senderButton.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
 
 - (IBAction)resetButtonClicked:(id)sender {
     [self resetAllFields];
@@ -169,8 +117,14 @@
     [self filterFinesTable];
 }
 
-- (IBAction)showCriteriaButtonClicked:(id)sender {
+- (NSString *)getCaseNumberFromTextField {
+    if (![self.caseNumberTextField.text isEqual:@""])
+        return self.caseNumberTextField.text;
+    return nil;
+}
 
+- (IBAction)showCriteriaButtonClicked:(id)sender {
+    
     NSArray *stringArray = [NSArray arrayWithObjects:@"Show All", @"Show Open", nil];
     
     SFPickListViewController *pickListViewController = [SFPickListViewController createPickListViewController:stringArray selectedValue:self.showCriteriaButton.titleLabel.text];
@@ -188,7 +142,7 @@
 }
 
 - (IBAction)sortByButtonClicked:(id)sender {
-    NSArray *stringArray = [NSArray arrayWithObjects:@"Business Category", @"Sub Category", @"Violation Clause", @"Department", @"Status", @"Date", nil];
+    NSArray *stringArray = [NSArray arrayWithObjects:@"Business Category", @"Sub Category", @"Status", @"Date", nil];
     
     SFPickListViewController *pickListViewController = [SFPickListViewController createPickListViewController:stringArray selectedValue:sortByClause];
     
@@ -207,9 +161,10 @@
 - (void)loadFines {
     [self initializeAndStartActivityIndicatorSpinner];
     
-    isLoadingFines = YES;
+    //isLoadingFines = YES;
+    //TODO isLoadingCases
     
-    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForQuery:@"SELECT Id, CaseNumber, Account.Name, Shop__r.Name, Violation_Clause__c, Violation_Description__c, Violation_Short_Description__c, Fine_Department__c, X1st_Fine_Amount__c, X2nd_Fine_Amount__c, Comments__c, Status, CreatedBy.Name, CreatedDate, Fine_Last_Status_Update_Date__c FROM Case WHERE RecordType.DeveloperName = 'Pavilion_Fine'"];
+    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForQuery:@"SELECT Id, CaseNumber, Account.Name,RecordType.Name, Shop__r.Name,Full_Name__c, Gender__c,Mobile_Number__c,Date_of_Birth__c,Nationality__c,Passport_Number__c, Visa_Number__c,Passport_Issue_Date__c,  Violation_Clause__c, Violation_Description__c, Violation_Short_Description__c, Fine_Department__c, X1st_Fine_Amount__c, X2nd_Fine_Amount__c, Comments__c, Status, CreatedBy.Name, CreatedDate, Fine_Last_Status_Update_Date__c FROM Case WHERE (NOT RecordType.DeveloperName LIKE '%Fine') AND (NOT  RecordType.DeveloperName LIKE 'Support')"];
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
@@ -236,18 +191,6 @@
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
-- (void)loadPavilionFines {
-    [self initializeAndStartActivityIndicatorSpinner];
-    
-    isLoadingPavilionFines = YES;
-    selectedPavilionFineDepartment = @"";
-    selectedPavilionFineObject = nil;
-    selectedPavilionFineDepartmentIndex = -1;
-    
-    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForQuery:@"SELECT Id, Name, X1st_Fine_Amount__c, Department__c, Violation_Clause__c, Fine_Description__c, Violation_Short_Description__c FROM Pavilion_Fine_Type__c"];
-    [[SFRestAPI sharedInstance] send:request delegate:self];
-}
-
 - (void)loadPavilionQueueId {
     [self initializeAndStartActivityIndicatorSpinner];
     
@@ -265,10 +208,11 @@
     [self.loadingView setHidden:NO];
     
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+   // NSLog(@"%hhd",[[UIApplication sharedApplication] isIgnoringInteractionEvents]);
 }
 
 - (void)stopActivityIndicatorSpinner {
-    if(isLoadingBusinessCategories || isLoadingSubCategories || isLoadingPavilionFines || isLoadingFines || isLoadingQueueId)
+    if(isLoadingBusinessCategories || isLoadingSubCategories || isLoadingQueueId)
         return;
     
     [self.loadingView setHidden:YES];
@@ -288,24 +232,16 @@
     [self.subCategoryButton setTitle:@"Sub-Category" forState:UIControlStateNormal];
 }
 
-- (void)resetPavilionFineDepartmentButton {
-    selectedPavilionFineDepartment = @"";
-    selectedPavilionFineDepartmentIndex = -1;
-    [self.departmentButton setTitle:@"Department" forState:UIControlStateNormal];
+- (void)resetCaseNumberTextField {
+    [self.caseNumberTextField setText:@""];
 }
 
-- (void)resetPavilionFineDescriptionButton {
-    selectedPavilionFineObject = nil;
-    selectedPavilionFineDescriptionIndex = -1;
-    [self.fineButton setTitle:@"Fine" forState:UIControlStateNormal];
-}
+
 
 - (void)resetAllFields {
     [self resetBusinessCategoryButton];
     [self resetSubCategoryButton];
-    [self resetPavilionFineDepartmentButton];
-    [self resetPavilionFineDescriptionButton];
-    
+    [self resetCaseNumberTextField];
     [self filterFinesTable];
 }
 
@@ -316,9 +252,11 @@
     
     [predicateString appendFormat:@"AND SubCategory LIKE '%@' ", selectedSubCategoryObject ? selectedSubCategoryObject.Name : @"*"];
     
-    [predicateString appendFormat:@"AND FineDepartment LIKE '%@'", [selectedPavilionFineDepartment isEqualToString:@""] ? @"*" : selectedPavilionFineDepartment];
+    //TODO write here the text filter logic
+    if (![self.caseNumberTextField.text isEqual:@""])
+        [predicateString appendFormat:@"AND  caseNumber='%@' ",self.caseNumberTextField.text];
     
-    [predicateString appendFormat:@"AND ViolationClause LIKE '%@' ", selectedPavilionFineObject ? selectedPavilionFineObject.ViolationClause : @"*"];
+    
     
     if(!showAllFines)
         [predicateString appendString:@"AND NOT(Status IN {\"Rectified\", \"Fine Rejected\", \"3rd Fine Approved\"})"];
@@ -398,27 +336,12 @@
             
         }
     }
-    else if([self.pavilionFineDepartmentPickerPopover isPopoverVisible])
+    /* TODO no need to do anthing here :D
+     else if([self.pavilionFineDescriptionPickerPopover isPopoverVisible])
     {
-        [self.pavilionFineDepartmentPickerPopover dismissPopoverAnimated:YES];
-        if(index > -1) {
-            selectedPavilionFineDepartment = [pavilionFineDepartmentStringArray objectAtIndex:index];
-            selectedPavilionFineDepartmentIndex = index;
-            [self.departmentButton setTitle:selectedPavilionFineDepartment forState:UIControlStateNormal];
-            
-            [self resetPavilionFineDescriptionButton];
-        }
+        
     }
-    else if([self.pavilionFineDescriptionPickerPopover isPopoverVisible])
-    {
-        [self.pavilionFineDescriptionPickerPopover dismissPopoverAnimated:YES];
-        if(index > -1)
-        {
-            selectedPavilionFineObject = [pavilionFineTypeFilteredArray objectAtIndex:index];
-            selectedPavilionFineDescriptionIndex = index;
-            [self.fineButton setTitle:selectedPavilionFineObject.ShortDescription forState:UIControlStateNormal];
-        }
-    }
+     */
 }
 
 #pragma SFPickListViewDelegate
@@ -459,7 +382,9 @@
     NSString *selectQuery = [request.queryParams objectForKey:@"q"];
     if([selectQuery rangeOfString:@"FROM Case"].location != NSNotFound)
     {
-        isLoadingFines = NO;
+        //isLoadingFines = NO;
+        //TODO i think i should create isLoadingCases instead
+        //TODO create fill the casesArray , not finesArray remember to change this
         self.finesArray = [[NSMutableArray alloc] init];
         for (NSDictionary *obj in [jsonResponse objectForKey:@"records"]) {
             NSString *shopName = @"";
@@ -470,21 +395,21 @@
             if(![[obj objectForKey:@"Account"] isKindOfClass:[NSNull class]])
                 businessCategoryName = [[obj objectForKey:@"Account"] objectForKey:@"Name"];
             
-            [self.finesArray addObject:[[Fine alloc] initFineWithId:[obj objectForKey:@"Id"]
-                                                         CaseNumber:[obj objectForKey:@"CaseNumber"]
-                                                   BusinessCategory:businessCategoryName
-                                                        SubCategory:shopName
-                                                    ViolationClause:[obj objectForKey:@"Violation_Clause__c"]
-                                               ViolationDescription:[obj objectForKey:@"Violation_Description__c"]
-                                          ViolationShortDescription:[obj objectForKey:@"Violation_Short_Description__c"]
-                                                     FineDepartment:[obj objectForKey:@"Fine_Department__c"]
-                                                     X1stFineAmount:(NSNumber*)[obj objectForKey:@"X1st_Fine_Amount__c"]
-                                                     X2ndFineAmount:(NSNumber*)[obj objectForKey:@"X2nd_Fine_Amount__c"]
-                                                           Comments:[obj objectForKey:@"Comments__c"]
-                                                             Status:[obj objectForKey:@"Status"]
-                                                          CreatedBy:[[obj objectForKey:@"CreatedBy"] objectForKey:@"Name"]
-                                                        CreatedDate:[obj objectForKey:@"CreatedDate"]
-                                           FineLastStatusUpdateDate:[obj objectForKey:@"Fine_Last_Status_Update_Date__c"]]];
+            NSString *serviceType =@"";
+            if (![[obj objectForKey:@"RecordType"] isKindOfClass:[NSNull class]]) {
+                serviceType =[[obj objectForKey:@"RecordType"] objectForKey:@"Name"];
+            }
+            
+            NSDate *createDate = nil;
+            if (![[obj objectForKey:@"CreatedDate"] isKindOfClass:[NSNull class]]) {
+                NSDateFormatter *format = [[NSDateFormatter alloc] init];
+                [format setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+                [format setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+                [format setTimeZone:[NSTimeZone defaultTimeZone]];
+                createDate = [format dateFromString:[obj objectForKey:@"CreatedDate"]];
+            }
+            //SELECT Id, CaseNumber, Account.Name,RecordType.DeveloperName, Shop__r.Name,Full_Name__c, Gender__c,Mobile_Number__c,Date_of_Birth__c,Nationality__c,Passport_Number__c, Visa_Number__c,Passport_Issue_Date__c,  Violation_Clause__c, Violation_Description__c, Violation_Short_Description__c, Fine_Department__c, X1st_Fine_Amount__c, X2nd_Fine_Amount__c, Comments__c, Status, CreatedBy.Name, CreatedDate, Fine_Last_Status_Update_Date__c FROM Case WHERE (NOT RecordType.DeveloperName LIKE '%Fine')"
+            [self.finesArray addObject:[[Case alloc] initWithId:[obj objectForKey:@"Id"] caseNumber:[obj objectForKey:@"CaseNumber"] createdDate:createDate exhibitorName:shopName serviceType:serviceType applicationDate:createDate status:[obj objectForKey:@"Status"] BusinessCategory:businessCategoryName SubCategory:shopName nationality:[obj objectForKey:@"Nationality__c"] passportNumber:[obj objectForKey:@"Passport_Number__c"] visaNumber:[obj objectForKey:@"Visa_Number__c"] passportIssueDate:[obj objectForKey:@"Passport_Issue_Date__c"] fullName:[obj objectForKey:@"Full_Name__c"]]];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -515,9 +440,11 @@
         }
         NSLog(@"request:didLoadResponse:  Object: Shop__c, #records: %lu", (unsigned long)self.subCategoriesArray.count);
     }
+    /*
     else if([selectQuery rangeOfString:@"FROM Pavilion_Fine_Type__c"].location != NSNotFound)
     {
-        isLoadingPavilionFines = NO;
+        //isLoadingPavilionFines = NO;
+        //TODO i guess this part is useless
         self.pavilionFineTypeArray = [[NSMutableArray alloc] init];
         for (NSDictionary *obj in [jsonResponse objectForKey:@"records"]) {
             [self.pavilionFineTypeArray addObject:[[PavilionFineType alloc]
@@ -531,6 +458,7 @@
         }
         NSLog(@"request:didLoadResponse:  Object: Pavilion_Fine_Type__c, #records: %lu", (unsigned long)self.pavilionFineTypeArray.count);
     }
+     */
     else if([selectQuery rangeOfString:@"FROM Group"].location != NSNotFound)
     {
         isLoadingQueueId = NO;
@@ -551,7 +479,8 @@
     NSString *selectQuery = [request.queryParams objectForKey:@"q"];
     if([selectQuery rangeOfString:@"FROM Case"].location != NSNotFound)
     {
-        isLoadingFines = NO;
+        //isLoadingFines = NO;
+        //TODO isLoadingCases
     }
     else if ([selectQuery rangeOfString:@"FROM Account"].location != NSNotFound)
     {
@@ -561,10 +490,12 @@
     {
         isLoadingSubCategories = NO;
     }
+    /*
     else if([selectQuery rangeOfString:@"FROM Pavilion_Fine_Type__c"].location != NSNotFound)
     {
         isLoadingPavilionFines = NO;
     }
+     */
     else if([selectQuery rangeOfString:@"FROM Group"].location != NSNotFound)
     {
         isLoadingQueueId = NO;
@@ -592,63 +523,105 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"FineTableViewCell";
+//    static NSString *CellIdentifier = @"CaseTableViewCell";
+//    
+//    CaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    
+//    if(!cell) {
+//        
+//        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CaseTableViewCell" owner:self options:nil];
+//        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+//        cell = [topLevelObjects objectAtIndex:0];
+////        [tableView registerNib:[UINib nibWithNibName:@"CaseTableViewCell"  bundle:nil]forCellReuseIdentifier:CellIdentifier];
+////        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+////        cell = [[CaseTableViewCell alloc] init];
+//    }
+    static NSString *CellIdentifier = @"CaseTableViewCell";
     
-    FineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(!cell) {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"FineTableViewCell" owner:self options:nil];
+        //NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CaseTableViewCell" owner:self options:nil];
+        cell = [[CaseTableViewCell alloc] init];
         // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-        cell = [topLevelObjects objectAtIndex:0];
+        //cell = [topLevelObjects objectAtIndex:0];
     }
+
     
-    Fine *currentFine = [finesFilteredArray objectAtIndex:indexPath.row];
-    
-    [cell setFine:currentFine];
+    //Fine *currentFine = [finesFilteredArray objectAtIndex:indexPath.row];
+    //Case *currentCase = [[Case alloc] initWithId:<#(NSString *)#> caseNumber:<#(NSString *)#> createdDate:<#(NSDate *)#> exhibitorName:<#(NSString *)#> serviceType:(NSString *) applicationDate:<#(NSDate *)#> status:<#(NSString *)#>];
+    //[cell setSelected:YES];
+    //[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+    Case *currentCase = [finesFilteredArray objectAtIndex:indexPath.row];
+    [cell setCase:currentCase];
     
     return cell;
 }
 
 #pragma UITableViewDelegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        NSLog(@"xcode is fucked up.");
+//        [[[UIAlertView alloc] initWithTitle:@"ay7aga§§" message:@"s5al aho" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+//    });
+     [self.finesTableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [self.finesTableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    Fine *selectedFine = [finesFilteredArray objectAtIndex:indexPath.row];
-    BusinessCategory *category;
-    for (BusinessCategory *any in self.businessCategoriesArray) {
-        if ([any.Name isEqualToString:selectedFine.BusinessCategory]) {
-            category = any;
-        }
-    }
-    SubCategory *subCategory;
-    for (SubCategory *any in self.subCategoriesArray) {
-        if ([any.Name isEqualToString:selectedFine.SubCategory]) {
-            subCategory = any;
-        }
-    }
+     
+     Case *selectedFine = [finesFilteredArray objectAtIndex:indexPath.row];
     
-    FineDetailsViewController *fineDetailsViewController = [[FineDetailsViewController alloc] initFineDetailsViewControllerWithFine:selectedFine FineQueueId:fineQueueId GR1QueueId:GR1QueueId BusinessCategory:category SubCategory:subCategory];
+    CaseDetailsViewController *caseDetailsViewController = [[CaseDetailsViewController alloc] initWithCase:selectedFine];
     
-    fineDetailsViewController.delegate = self;
-    
-    self.fineDetailspopover = [[UIPopoverController alloc] initWithContentViewController:fineDetailsViewController];
-    self.fineDetailspopover.delegate = self;
-    self.fineDetailspopover.popoverContentSize = fineDetailsViewController.view.frame.size;
+    caseDetailsViewController.delegate = self;
+    self.caseDetailspopover = [[UIPopoverController alloc] initWithContentViewController:caseDetailsViewController];
+    self.caseDetailspopover.delegate = self;
+    self.caseDetailspopover.popoverContentSize = caseDetailsViewController.view.frame.size;
     
     CGRect rect = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2, 1, 1);
     
-    [self.fineDetailspopover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:0 animated:YES];
+    [self.caseDetailspopover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:0 animated:YES];
+     
+     
+    /*
+    [self.finesTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    Fine *selectedFine = [finesFilteredArray objectAtIndex:indexPath.row];
+    
+    FineDetailsViewController *fineDetailsViewController = [[FineDetailsViewController alloc] initFineDetailsViewControllerWithFine:selectedFine FineQueueId:fineQueueId GR1QueueId:GR1QueueId];
+    
+    fineDetailsViewController.delegate = self;
+    
+    self.caseDetailspopover = [[UIPopoverController alloc] initWithContentViewController:fineDetailsViewController];
+    self.caseDetailspopover.delegate = self;
+    self.caseDetailspopover.popoverContentSize = fineDetailsViewController.view.frame.size;
+    
+    CGRect rect = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2, 1, 1);
+    
+    [self.caseDetailspopover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:0 animated:YES];
+     */
 }
 
-#pragma FineDetailsViewDelegate
-- (void)didFinishUpdatingFine {
-    [self.fineDetailspopover dismissPopoverAnimated:YES];
+
+
+#pragma CaseDetailsViewDelegate
+- (void)didFinishUpdatingCase {
+    [self.caseDetailspopover dismissPopoverAnimated:YES];
     [self loadFines];
 }
 
-- (void)closeFineDetailsPopup {
-    [self.fineDetailspopover dismissPopoverAnimated:YES];
+- (void)closeCaseDetailsPopup {
+    [self.caseDetailspopover dismissPopoverAnimated:YES];
 }
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

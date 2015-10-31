@@ -21,7 +21,6 @@
 		134CE53B19ED357300F80649 /* ExistingFinesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 134CE53919ED357300F80649 /* ExistingFinesViewController.xib */; };
 		1361E9F819DAC1D800DC92AB /* NewFinesTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1361E9F619DAC1D800DC92AB /* NewFinesTabViewController.m */; };
 		1361E9F919DAC1D800DC92AB /* NewFinesTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1361E9F719DAC1D800DC92AB /* NewFinesTabViewController.xib */; };
-		1362055219DC259F00313E2E /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1362055119DC259F00313E2E /* ExternalAccessory.framework */; };
 		1362056119DC268E00313E2E /* HelperClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 1362056019DC268E00313E2E /* HelperClass.m */; };
 		1379C73019EBE58F004ADC6C /* BusinessCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1379C72F19EBE58F004ADC6C /* BusinessCategory.m */; };
 		1379C73319EBE68C004ADC6C /* SubCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1379C73219EBE68C004ADC6C /* SubCategory.m */; };
@@ -40,6 +39,16 @@
 		4F3F413617E7CA71008B3283 /* libMKNetworkKit-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3F412B17E7C9CA008B3283 /* libMKNetworkKit-iOS.a */; };
 		4F3F413717E7CA84008B3283 /* libSalesforceNetworkSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3F413317E7C9CA008B3283 /* libSalesforceNetworkSDK.a */; };
 		4F7484BF18DD1324006E7D50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F7484BE18DD1324006E7D50 /* Images.xcassets */; };
+		661087201BC2967000064585 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610871D1BC2967000064585 /* MJPopupBackgroundView.m */; };
+		661087211BC2967000064585 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610871F1BC2967000064585 /* UIViewController+MJPopupViewController.m */; };
+		669A65081B9EC3FF0012BC7D /* ExistingCasesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 669A65061B9EC3FF0012BC7D /* ExistingCasesViewController.m */; };
+		669A650D1B9EDE2F0012BC7D /* ExistingCasesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 669A650C1B9EDE2F0012BC7D /* ExistingCasesViewController.xib */; };
+		669A65111BA042970012BC7D /* CaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 669A650F1BA042970012BC7D /* CaseTableViewCell.m */; };
+		669A65121BA042970012BC7D /* CaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 669A65101BA042970012BC7D /* CaseTableViewCell.xib */; };
+		669A65161BA048F50012BC7D /* Case.m in Sources */ = {isa = PBXBuildFile; fileRef = 669A65151BA048F50012BC7D /* Case.m */; };
+		669A651D1BA819200012BC7D /* CaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 669A651C1BA819200012BC7D /* CaseDetailsViewController.m */; };
+		669A65201BA824390012BC7D /* CaseDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 669A651F1BA824390012BC7D /* CaseDetailsViewController.xib */; };
+		66CBE5B81B95A1AD00123746 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CBE5B71B95A1AD00123746 /* ExternalAccessory.framework */; };
 		824A9DD91724E16400C9BD79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DD81724E16400C9BD79 /* UIKit.framework */; };
 		824A9DDB1724E16400C9BD79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DDA1724E16400C9BD79 /* Foundation.framework */; };
 		824A9DDD1724E16400C9BD79 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DDC1724E16400C9BD79 /* CoreGraphics.framework */; };
@@ -95,7 +104,6 @@
 		1361E9F519DAC1D800DC92AB /* NewFinesTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFinesTabViewController.h; sourceTree = "<group>"; };
 		1361E9F619DAC1D800DC92AB /* NewFinesTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFinesTabViewController.m; sourceTree = "<group>"; };
 		1361E9F719DAC1D800DC92AB /* NewFinesTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewFinesTabViewController.xib; sourceTree = "<group>"; };
-		1362055119DC259F00313E2E /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		1362055F19DC268E00313E2E /* HelperClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperClass.h; sourceTree = "<group>"; };
 		1362056019DC268E00313E2E /* HelperClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelperClass.m; sourceTree = "<group>"; };
 		1379C72E19EBE58F004ADC6C /* BusinessCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessCategory.h; sourceTree = "<group>"; };
@@ -138,6 +146,23 @@
 		4F3F413417E7CA5C008B3283 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4F57794817F4CF5B004706EE /* SFRestAPI+Files.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SFRestAPI+Files.h"; sourceTree = "<group>"; };
 		4F7484BE18DD1324006E7D50 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6610871C1BC2967000064585 /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
+		6610871D1BC2967000064585 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
+		6610871E1BC2967000064585 /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
+		6610871F1BC2967000064585 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
+		669A65051B9EC3FF0012BC7D /* ExistingCasesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingCasesViewController.h; sourceTree = "<group>"; };
+		669A65061B9EC3FF0012BC7D /* ExistingCasesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingCasesViewController.m; sourceTree = "<group>"; };
+		669A650C1B9EDE2F0012BC7D /* ExistingCasesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingCasesViewController.xib; sourceTree = "<group>"; };
+		669A650E1BA042970012BC7D /* CaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseTableViewCell.h; sourceTree = "<group>"; };
+		669A650F1BA042970012BC7D /* CaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseTableViewCell.m; sourceTree = "<group>"; };
+		669A65101BA042970012BC7D /* CaseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseTableViewCell.xib; sourceTree = "<group>"; };
+		669A65141BA048F50012BC7D /* Case.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Case.h; sourceTree = "<group>"; };
+		669A65151BA048F50012BC7D /* Case.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Case.m; sourceTree = "<group>"; };
+		669A651B1BA819200012BC7D /* CaseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CaseDetailsViewController.h; path = ../../CaseDetailsViewController.h; sourceTree = "<group>"; };
+		669A651C1BA819200012BC7D /* CaseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CaseDetailsViewController.m; path = ../../CaseDetailsViewController.m; sourceTree = "<group>"; };
+		669A651F1BA824390012BC7D /* CaseDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailsViewController.xib; sourceTree = "<group>"; };
+		66CBE5B71B95A1AD00123746 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		66CBE5B91B95A1AD00123746 /* GVFines.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GVFines.entitlements; sourceTree = "<group>"; };
 		821C8F2D18C5309B000FAF96 /* SFCommunityData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCommunityData.h; sourceTree = "<group>"; };
 		821C8F2E18C5309B000FAF96 /* SFUserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFUserAccount.h; sourceTree = "<group>"; };
 		821C8F2F18C5309B000FAF96 /* SFUserAccountConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFUserAccountConstants.h; sourceTree = "<group>"; };
@@ -259,7 +284,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1362055219DC259F00313E2E /* ExternalAccessory.framework in Frameworks */,
 				4F3F413717E7CA84008B3283 /* libSalesforceNetworkSDK.a in Frameworks */,
 				4F3F413617E7CA71008B3283 /* libMKNetworkKit-iOS.a in Frameworks */,
 				824A9FDD1725079100C9BD79 /* libcrypto.a in Frameworks */,
@@ -271,6 +295,7 @@
 				824A9FE51725079100C9BD79 /* libsqlcipher.a in Frameworks */,
 				824A9FDE1725079100C9BD79 /* libssl.a in Frameworks */,
 				824A9FE81725098F00C9BD79 /* libxml2.dylib in Frameworks */,
+				66CBE5B81B95A1AD00123746 /* ExternalAccessory.framework in Frameworks */,
 				824A9FEA1725099600C9BD79 /* libz.dylib in Frameworks */,
 				824A9DD91724E16400C9BD79 /* UIKit.framework in Frameworks */,
 				4F3F413517E7CA5C008B3283 /* ImageIO.framework in Frameworks */,
@@ -343,6 +368,7 @@
 		13545BD919D7FCCA0056EF73 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6610871B1BC2967000064585 /* MJpopup */,
 				13AB270A19FF9E7B008CB1FA /* CaptureImagesPopover */,
 				130C43EC19F4DB6000B188D8 /* CustomIOS7AlertView */,
 				130C43EF19F4DB6000B188D8 /* No Internet Popover */,
@@ -352,6 +378,8 @@
 				13545BDA19D7FD860056EF73 /* NewFinesViewControlller */,
 				1361E9F419DAC1BE00DC92AB /* NewFineTabViewController */,
 				1327654F19D966F600E84F4F /* PopoverPickerView */,
+				669A650B1B9ED9660012BC7D /* ExistingCasesViewController */,
+				669A651E1BA8198D0012BC7D /* CaseDetailsViewController */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -389,6 +417,8 @@
 				1379C73519EBE6F2004ADC6C /* PavilionFineType.m */,
 				1379C73119EBE68C004ADC6C /* SubCategory.h */,
 				1379C73219EBE68C004ADC6C /* SubCategory.m */,
+				669A65141BA048F50012BC7D /* Case.h */,
+				669A65151BA048F50012BC7D /* Case.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -529,6 +559,49 @@
 			path = SalesforceNetworkSDK;
 			sourceTree = "<group>";
 		};
+		6610871B1BC2967000064585 /* MJpopup */ = {
+			isa = PBXGroup;
+			children = (
+				6610871C1BC2967000064585 /* MJPopupBackgroundView.h */,
+				6610871D1BC2967000064585 /* MJPopupBackgroundView.m */,
+				6610871E1BC2967000064585 /* UIViewController+MJPopupViewController.h */,
+				6610871F1BC2967000064585 /* UIViewController+MJPopupViewController.m */,
+			);
+			path = MJpopup;
+			sourceTree = "<group>";
+		};
+		669A650B1B9ED9660012BC7D /* ExistingCasesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				669A65051B9EC3FF0012BC7D /* ExistingCasesViewController.h */,
+				669A65061B9EC3FF0012BC7D /* ExistingCasesViewController.m */,
+				669A650C1B9EDE2F0012BC7D /* ExistingCasesViewController.xib */,
+				669A65131BA0429F0012BC7D /* CaseTableViewCell */,
+			);
+			name = ExistingCasesViewController;
+			sourceTree = "<group>";
+		};
+		669A65131BA0429F0012BC7D /* CaseTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				669A650E1BA042970012BC7D /* CaseTableViewCell.h */,
+				669A650F1BA042970012BC7D /* CaseTableViewCell.m */,
+				669A65101BA042970012BC7D /* CaseTableViewCell.xib */,
+			);
+			name = CaseTableViewCell;
+			sourceTree = "<group>";
+		};
+		669A651E1BA8198D0012BC7D /* CaseDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				669A651F1BA824390012BC7D /* CaseDetailsViewController.xib */,
+				669A651B1BA819200012BC7D /* CaseDetailsViewController.h */,
+				669A651C1BA819200012BC7D /* CaseDetailsViewController.m */,
+			);
+			name = CaseDetailsViewController;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		824A9DCC1724E16400C9BD79 = {
 			isa = PBXGroup;
 			children = (
@@ -549,7 +622,7 @@
 		824A9DD71724E16400C9BD79 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1362055119DC259F00313E2E /* ExternalAccessory.framework */,
+				66CBE5B71B95A1AD00123746 /* ExternalAccessory.framework */,
 				824A9FE71725098F00C9BD79 /* libxml2.dylib */,
 				824A9FE91725099600C9BD79 /* libz.dylib */,
 				824A9FEB17250ADA00C9BD79 /* CFNetwork.framework */,
@@ -570,6 +643,7 @@
 		824A9DDE1724E16400C9BD79 /* GVFines */ = {
 			isa = PBXGroup;
 			children = (
+				66CBE5B91B95A1AD00123746 /* GVFines.entitlements */,
 				824A9E3C1724E9F400C9BD79 /* readme.txt */,
 				824A9E301724E2A900C9BD79 /* Classes */,
 				824A9F301725079000C9BD79 /* Dependencies */,
@@ -881,7 +955,12 @@
 				ORGANIZATIONNAME = CloudConcept;
 				TargetAttributes = {
 					824A9DD41724E16400C9BD79 = {
-						DevelopmentTeam = 9M23A99R9P;
+						DevelopmentTeam = CSS2DLH755;
+						SystemCapabilities = {
+							com.apple.WAC = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -909,12 +988,14 @@
 			files = (
 				824A9DE31724E16400C9BD79 /* InfoPlist.strings in Resources */,
 				824A9E3B1724E58200C9BD79 /* InitialViewController.xib in Resources */,
+				669A650D1B9EDE2F0012BC7D /* ExistingCasesViewController.xib in Resources */,
 				824A9E3D1724E9F400C9BD79 /* readme.txt in Resources */,
 				1345715A19DADCA3008AF512 /* NewFinesView.xib in Resources */,
 				130C43F519F4DB6000B188D8 /* NoInternetPopoverViewController.xib in Resources */,
 				824A9E3F1724EC6300C9BD79 /* Settings.bundle in Resources */,
 				824A9E411724ECC600C9BD79 /* SalesforceSDKResources.bundle in Resources */,
 				13E1BC0719EFDBF600B087C2 /* FineDetailsViewController.xib in Resources */,
+				669A65121BA042970012BC7D /* CaseTableViewCell.xib in Resources */,
 				1312EE5419DA8F3700A2A96C /* MainViewController.xib in Resources */,
 				4F7484BF18DD1324006E7D50 /* Images.xcassets in Resources */,
 				824A9FDF1725079100C9BD79 /* openssl_license.txt in Resources */,
@@ -922,6 +1003,7 @@
 				13B9379819ED518A000559FC /* FineTableViewCell.xib in Resources */,
 				13AB271519FFA3DA008CB1FA /* ImagesCollectionViewCell.xib in Resources */,
 				134CE53B19ED357300F80649 /* ExistingFinesViewController.xib in Resources */,
+				669A65201BA824390012BC7D /* CaseDetailsViewController.xib in Resources */,
 				1327655419D966F600E84F4F /* PopoverPickerViewController.xib in Resources */,
 				13AB270F19FF9E93008CB1FA /* CaptureImagesViewController.xib in Resources */,
 				824A9FE61725079100C9BD79 /* LICENSE in Resources */,
@@ -937,19 +1019,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				130C43F319F4DB6000B188D8 /* CustomIOS7AlertView.m in Sources */,
+				661087211BC2967000064585 /* UIViewController+MJPopupViewController.m in Sources */,
 				13E1BC0619EFDBF600B087C2 /* FineDetailsViewController.m in Sources */,
 				1379C73019EBE58F004ADC6C /* BusinessCategory.m in Sources */,
 				131D912F19EE608100A9447A /* Fine.m in Sources */,
+				669A651D1BA819200012BC7D /* CaseDetailsViewController.m in Sources */,
 				130C43F419F4DB6000B188D8 /* NoInternetPopoverViewController.m in Sources */,
+				669A65161BA048F50012BC7D /* Case.m in Sources */,
 				1327655319D966F600E84F4F /* PopoverPickerViewController.m in Sources */,
+				661087201BC2967000064585 /* MJPopupBackgroundView.m in Sources */,
 				1361E9F819DAC1D800DC92AB /* NewFinesTabViewController.m in Sources */,
 				1345715919DADCA3008AF512 /* NewFinesView.m in Sources */,
 				1312EE5319DA8F3700A2A96C /* MainViewController.m in Sources */,
 				824A9DE51724E16400C9BD79 /* main.m in Sources */,
 				824A9E331724E2A900C9BD79 /* AppDelegate.m in Sources */,
+				669A65111BA042970012BC7D /* CaseTableViewCell.m in Sources */,
 				1362056119DC268E00313E2E /* HelperClass.m in Sources */,
 				1379C73319EBE68C004ADC6C /* SubCategory.m in Sources */,
 				13AB271419FFA3DA008CB1FA /* ImagesCollectionViewCell.m in Sources */,
+				669A65081B9EC3FF0012BC7D /* ExistingCasesViewController.m in Sources */,
 				824A9E3A1724E58200C9BD79 /* InitialViewController.m in Sources */,
 				1379C73619EBE6F2004ADC6C /* PavilionFineType.m in Sources */,
 				134CE53A19ED357300F80649 /* ExistingFinesViewController.m in Sources */,
@@ -1035,7 +1123,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = GVFines/GVFines.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVFines/GVFines-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1078,7 +1168,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = GVFines/GVFines.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVFines/GVFines-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
