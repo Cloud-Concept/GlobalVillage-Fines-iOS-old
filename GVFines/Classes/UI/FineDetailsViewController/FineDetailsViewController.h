@@ -11,6 +11,8 @@
 #import "BusinessCategory.h"
 #import "SubCategory.h"
 #import "CaptureImagesViewController.h"
+#import "CustomIOS7AlertView.h"
+#import "ReissueViewController.h"
 
 
 @class Fine;
@@ -21,7 +23,7 @@
 - (void)closeFineDetailsPopup;
 @end
 
-@interface FineDetailsViewController : UIViewController <UIAlertViewDelegate, SFRestDelegate,UIScrollViewDelegate,CaptureImagesViewControllerDelegate,UIPopoverControllerDelegate>
+@interface FineDetailsViewController : UIViewController <UIAlertViewDelegate, SFRestDelegate,UIScrollViewDelegate,CaptureImagesViewControllerDelegate,UIPopoverControllerDelegate,CustomIOS7AlertViewDelegate,ReissueViewDelegate>
 {
     Fine *currentFine;
     BusinessCategory *currentCategory;
@@ -52,6 +54,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageDownloadingIndicator;
 @property (weak, nonatomic) id <FineDetailsViewDelegate> delegate;
 @property (strong, nonatomic) UIPopoverController *imagesSelectionPopover;
+@property (strong,nonatomic) UIPopoverController *reissueFinePopover;
 
 
 - (IBAction)rectifiedButtonClicked:(id)sender;

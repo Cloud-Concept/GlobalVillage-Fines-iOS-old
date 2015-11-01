@@ -130,6 +130,14 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4l-pY-fF2">
+                    <rect key="frame" x="368" y="136.5" width="52" height="34.5"/>
+                    <animations/>
+                    <state key="normal" image="CameraButtonIcon"/>
+                    <connections>
+                        <action selector="cameraButtonClicked:" destination="-1" eventType="touchUpInside" id="sZh-aW-uHz"/>
+                    </connections>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fine Description:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwh-oC-Dwc">
                     <rect key="frame" x="8" y="259" width="160" height="22"/>
                     <animations/>
@@ -289,6 +297,11 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="h4l-pY-fF2"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="335" y="261"/>
         </view>
     </objects>
@@ -297,6 +310,7 @@
         <image name="ActionButtonLeftDisabledBackground" width="173" height="57"/>
         <image name="ActionButtonRightBackground" width="114" height="72"/>
         <image name="ActionButtonRightDisabledBackground" width="169" height="50"/>
+        <image name="CameraButtonIcon" width="51" height="51"/>
         <image name="CloseButtonIcon" width="33" height="33"/>
         <image name="fineStatusYellow" width="15" height="15"/>
     </resources>

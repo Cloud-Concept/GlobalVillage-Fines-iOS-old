@@ -14,6 +14,7 @@
 #import "SFOAuthCoordinator.h"
 #import "UIViewController+MJPopupViewController.h"
 #import "SFDateUtil.h"
+#import "NewFinesView.h"
 
 @interface FineDetailsViewController ()
 @property(strong,nonatomic) NSMutableArray *arrayOfImages;
@@ -183,20 +184,44 @@
 }
 
 - (IBAction)reIsuueButtonClicked:(id)sender {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Re-Issue" message:@"Are you sure you want to re-issue this fine?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+   // CustomIOSAlertView * alert = [[CustomIOSAlertView alloc] initWithTitle:@"Re-Issue" message:@"Are you sure you want to re-issue this fine?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+//    
+//    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//    [[alert textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeAlphabet];
+//    [[alert textFieldAtIndex:0] setText:currentFine.Comments];
+//    
+//    CustomIOS7AlertView * alert = [[CustomIOS7AlertView alloc] init];
+//    [alert setDelegate:self];
+//    [alert setButtonTitles:@[@"Yes",@"No"]];
+//    [alert setOnButtonTouchUpInside:^(CustomIOS7AlertView *alertView, int buttonIndex) {
+//        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
+//        [alertView close];
+//    }];
+//    UIView *view = [[UIView alloc] init];
+//    view.frame =alert.frame;
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btn addTarget:self action:@selector(cameraButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [btn setTitle:@"add Images" forState:UIControlStateNormal];
+//    btn.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
+//    [view addSubview:btn];
+//    [alert addSubview:view];
+//    
+//    alert.tag = 2;
+//    
+//    [alert show];
+    ////////////////////
+    ///new view 2015
+    ReissueViewController *reissueViewController = [[ReissueViewController alloc] initWithFine:currentFine FineQueueId:fineQueueId GR1QueueId:GR1QueueId BusinessCategory:currentCategory SubCategory:currentSubCategory];
     
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [[alert textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeAlphabet];
-    [[alert textFieldAtIndex:0] setText:currentFine.Comments];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn addTarget:self action:@selector(cameraButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [btn setTitle:@"add Images" forState:UIControlStateNormal];
-    btn.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
-    [alert addSubview:btn];
+    reissueViewController.delegate = self;
     
-    alert.tag = 2;
+    self.reissueFinePopover = [[UIPopoverController alloc] initWithContentViewController:reissueViewController];
+    self.reissueFinePopover.delegate = self;
+    self.reissueFinePopover.popoverContentSize = reissueViewController.view.frame.size;
     
-    [alert show];
+    CGRect rect = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2, 1, 1);
+    
+    [self.reissueFinePopover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:0 animated:YES];
 }
 
 - (IBAction)closeButtonClicked:(id)sender {
@@ -261,8 +286,8 @@
     
     CaptureImagesViewController *captureImagesController = [[CaptureImagesViewController alloc] init];
     
-    //captureImagesController.mainViewController = self.parentViewController.mainViewController;
-    captureImagesController.mainViewController = self;
+    captureImagesController.mainViewController = self.parentViewController;
+    //captureImagesController.mainViewController = self;
     captureImagesController.imagesArray = [[NSMutableArray alloc] initWithArray:self.imagesArray];
     captureImagesController.delegate = self;
     
@@ -349,6 +374,8 @@
             newStatus = @"2nd Fine Printed";
             ownerId = GR1QueueId;
         }
+        /*NewFinesView *fineview = [[NewFinesView alloc] initWithFine:currentFine];
+        [self presentViewController:fineview animated:YES completion:nil];*/
         
         SFUserAccountManager *accountManager = [SFUserAccountManager sharedInstance];
         
@@ -360,13 +387,14 @@
         NSString *dateInString = [SFDateUtil toSOQLDateTimeString:[NSDate date] isDateTime:true];
         //selectedPavilionFineObject.Id, @"Pavilion_Fine_Type__c",
         NSDictionary *fields = [NSDictionary dictionaryWithObjectsAndKeys:
-                                currentFine.Id,@"ParentId",
+                                currentFine.Id,@"Parent_Fine__c",
                                 ownerId, @"OwnerId",
                                 accountManager.currentUser.credentials.userId, @"Latest_Fine_Issuer__c",
                                 @"012g00000000l68", @"RecordTypeId",
                                 currentCategory.Id, @"AccountId",
                                 currentSubCategory.Id, @"Shop__c",
                                 currentFine.Comments, @"Comments__c",
+                                newStatus,@"Status",
                                 dateInString, @"Fine_Last_Status_Update_Date__c",
                                 nil];
         SFRestRequest *request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Case" fields:fields];
@@ -395,5 +423,16 @@
         [HelperClass messageBox:@"An error occured while updating the fine." withTitle:@"Error"];
     });
 }
+
+#pragma FineDetailsViewDelegate
+- (void)didFinishUpdatingFine {
+    [self.reissueFinePopover dismissPopoverAnimated:YES];
+    //[self loadFines];
+}
+
+- (void)closeFineDetailsPopup {
+    [self.reissueFinePopover dismissPopoverAnimated:YES];
+}
+
 
 @end
