@@ -95,5 +95,6 @@
 - (void)tapInView;
 - (void)keyboardDidShow:(NSNotification *)notif;
 - (void)keyboardDidHide:(NSNotification *)notif;
+-(id) initWithFine:(Fine *)fine;
 
 @end

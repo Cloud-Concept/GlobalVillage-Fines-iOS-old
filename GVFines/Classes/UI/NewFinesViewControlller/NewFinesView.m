@@ -65,6 +65,27 @@
     pavilionFineRecordTypeId = @"";
     caseNumber = @"";
     
+    if (self.fine) {
+        BusinessCategory *category;
+        for (BusinessCategory *any in self.businessCategoriesArray) {
+            if ([any.Name isEqualToString:self.fine.BusinessCategory]) {
+                category = any;
+            }
+        }
+        SubCategory *subCategory;
+        for (SubCategory *any in self.subCategoriesArray) {
+            if ([any.Name isEqualToString:self.fine.SubCategory]) {
+                subCategory = any;
+            }
+        }
+        PavilionFineType *fineType;
+        for (PavilionFineType *any in self.pavilionFineTypeArray) {
+            if ([any.Name isEqualToString:self.fine]) {
+                fineType = any;
+            }
+        }
+    }
+    
     fineQueueId = @"";
     GR1QueueId = @"";
     

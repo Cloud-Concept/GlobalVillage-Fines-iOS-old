@@ -48,6 +48,8 @@
 		669A65161BA048F50012BC7D /* Case.m in Sources */ = {isa = PBXBuildFile; fileRef = 669A65151BA048F50012BC7D /* Case.m */; };
 		669A651D1BA819200012BC7D /* CaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 669A651C1BA819200012BC7D /* CaseDetailsViewController.m */; };
 		669A65201BA824390012BC7D /* CaseDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 669A651F1BA824390012BC7D /* CaseDetailsViewController.xib */; };
+		66A1986E1BE10A7200656F09 /* ReissueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A1986C1BE10A7200656F09 /* ReissueViewController.m */; };
+		66A1986F1BE10A7200656F09 /* ReissueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66A1986D1BE10A7200656F09 /* ReissueViewController.xib */; };
 		66CBE5B81B95A1AD00123746 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CBE5B71B95A1AD00123746 /* ExternalAccessory.framework */; };
 		824A9DD91724E16400C9BD79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DD81724E16400C9BD79 /* UIKit.framework */; };
 		824A9DDB1724E16400C9BD79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9DDA1724E16400C9BD79 /* Foundation.framework */; };
@@ -158,9 +160,12 @@
 		669A65101BA042970012BC7D /* CaseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseTableViewCell.xib; sourceTree = "<group>"; };
 		669A65141BA048F50012BC7D /* Case.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Case.h; sourceTree = "<group>"; };
 		669A65151BA048F50012BC7D /* Case.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Case.m; sourceTree = "<group>"; };
-		669A651B1BA819200012BC7D /* CaseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CaseDetailsViewController.h; path = ../../CaseDetailsViewController.h; sourceTree = "<group>"; };
-		669A651C1BA819200012BC7D /* CaseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CaseDetailsViewController.m; path = ../../CaseDetailsViewController.m; sourceTree = "<group>"; };
+		669A651B1BA819200012BC7D /* CaseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailsViewController.h; sourceTree = "<group>"; };
+		669A651C1BA819200012BC7D /* CaseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailsViewController.m; sourceTree = "<group>"; };
 		669A651F1BA824390012BC7D /* CaseDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailsViewController.xib; sourceTree = "<group>"; };
+		66A1986B1BE10A7200656F09 /* ReissueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReissueViewController.h; sourceTree = "<group>"; };
+		66A1986C1BE10A7200656F09 /* ReissueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReissueViewController.m; sourceTree = "<group>"; };
+		66A1986D1BE10A7200656F09 /* ReissueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReissueViewController.xib; sourceTree = "<group>"; };
 		66CBE5B71B95A1AD00123746 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		66CBE5B91B95A1AD00123746 /* GVFines.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GVFines.entitlements; sourceTree = "<group>"; };
 		821C8F2D18C5309B000FAF96 /* SFCommunityData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCommunityData.h; sourceTree = "<group>"; };
@@ -457,6 +462,7 @@
 		13E1BC0219EFDBD700B087C2 /* FineDetailsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				66A1986A1BE10A0A00656F09 /* ReissueViewController */,
 				13E1BC0319EFDBF600B087C2 /* FineDetailsViewController.h */,
 				13E1BC0419EFDBF600B087C2 /* FineDetailsViewController.m */,
 				13E1BC0519EFDBF600B087C2 /* FineDetailsViewController.xib */,
@@ -600,6 +606,16 @@
 			);
 			name = CaseDetailsViewController;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		66A1986A1BE10A0A00656F09 /* ReissueViewController */ = {
+			isa = PBXGroup;
+			children = (
+				66A1986B1BE10A7200656F09 /* ReissueViewController.h */,
+				66A1986C1BE10A7200656F09 /* ReissueViewController.m */,
+				66A1986D1BE10A7200656F09 /* ReissueViewController.xib */,
+			);
+			name = ReissueViewController;
 			sourceTree = "<group>";
 		};
 		824A9DCC1724E16400C9BD79 = {
@@ -951,7 +967,7 @@
 		824A9DCD1724E16400C9BD79 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = CloudConcept;
 				TargetAttributes = {
 					824A9DD41724E16400C9BD79 = {
@@ -1002,6 +1018,7 @@
 				13A3B78E1A0A06AA00B19E4E /* GV Logo.png in Resources */,
 				13B9379819ED518A000559FC /* FineTableViewCell.xib in Resources */,
 				13AB271519FFA3DA008CB1FA /* ImagesCollectionViewCell.xib in Resources */,
+				66A1986F1BE10A7200656F09 /* ReissueViewController.xib in Resources */,
 				134CE53B19ED357300F80649 /* ExistingFinesViewController.xib in Resources */,
 				669A65201BA824390012BC7D /* CaseDetailsViewController.xib in Resources */,
 				1327655419D966F600E84F4F /* PopoverPickerViewController.xib in Resources */,
@@ -1033,6 +1050,7 @@
 				1312EE5319DA8F3700A2A96C /* MainViewController.m in Sources */,
 				824A9DE51724E16400C9BD79 /* main.m in Sources */,
 				824A9E331724E2A900C9BD79 /* AppDelegate.m in Sources */,
+				66A1986E1BE10A7200656F09 /* ReissueViewController.m in Sources */,
 				669A65111BA042970012BC7D /* CaseTableViewCell.m in Sources */,
 				1362056119DC268E00313E2E /* HelperClass.m in Sources */,
 				1379C73319EBE68C004ADC6C /* SubCategory.m in Sources */,
@@ -1074,6 +1092,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1126,6 +1145,7 @@
 				CODE_SIGN_ENTITLEMENTS = GVFines/GVFines.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVFines/GVFines-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1155,6 +1175,7 @@
 					"-ObjC",
 					"-all_load",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cloudconceptgroup.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1171,6 +1192,7 @@
 				CODE_SIGN_ENTITLEMENTS = GVFines/GVFines.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVFines/GVFines-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1200,6 +1222,7 @@
 					"-ObjC",
 					"-all_load",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cloudconceptgroup.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;

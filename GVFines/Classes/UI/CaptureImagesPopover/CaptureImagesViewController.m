@@ -53,7 +53,11 @@
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
             [self presentViewController:imagePicker animated:YES completion:nil];
         } else {
-            [self.mainViewController presentViewController:imagePicker animated:YES completion:nil];
+            if (self.mainViewController) {
+                [self.mainViewController presentViewController:imagePicker animated:YES completion:nil];
+            } else {
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            }
         }
         
     }
@@ -72,7 +76,11 @@
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
             [self presentViewController:imagePicker animated:YES completion:nil];
         } else {
-            [self.mainViewController presentViewController:imagePicker animated:YES completion:nil];
+            if (self.mainViewController) {
+                [self.mainViewController presentViewController:imagePicker animated:YES completion:nil];
+            } else {
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            }
         }
     }
 }
@@ -115,7 +123,14 @@
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
-        [self.mainViewController dismissViewControllerAnimated:YES completion:nil];
+        
+        //[self.mainViewController dismissViewControllerAnimated:YES completion:nil];
+        ////
+        if (self.mainViewController) {
+            [self.mainViewController dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     }
     
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
