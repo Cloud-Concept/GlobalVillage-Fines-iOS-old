@@ -1171,6 +1171,7 @@
 					"$(SRCROOT)/GVFines/Dependencies/SalesforceSecurity",
 					"$(PROJECT_DIR)/GVFines/Classes/PrinterLibrary",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -1218,6 +1219,7 @@
 					"$(SRCROOT)/GVFines/Dependencies/SalesforceSecurity",
 					"$(PROJECT_DIR)/GVFines/Classes/PrinterLibrary",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",

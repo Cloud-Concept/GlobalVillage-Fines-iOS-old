@@ -23,6 +23,10 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+#import "SFSecurityLockout.h"
+#import "SFPasscodeViewControllerTypes.h"
 
 /**
  * Key associated with the storage and retrieval of remaining passcode validation attempts.
@@ -35,18 +39,14 @@ extern NSString * const kRemainingAttemptsKey;
 extern const NSUInteger kMaxNumberofAttempts;
 
 /**
- Mode constants indicating whether to create or verify an existing passcode.
- */
-typedef enum {
-    SFPasscodeControllerModeCreate,
-    SFPasscodeControllerModeVerify,
-    SFPasscodeControllerModeChange
-} SFPasscodeControllerMode;
-
-/**
  * Base class for passcode screen view controllers.
  */
 @interface SFAbstractPasscodeViewController : UIViewController
+
+/**
+ * The configuration data used to create or update the passcode.
+ */
+@property (readonly) SFPasscodeConfigurationData configData;
 
 /**
  * The minimum passcode length, which this view controller will enforce.
@@ -66,9 +66,9 @@ typedef enum {
 /**
  * Designated initializer for SFAbstractPasscodeViewController.
  * @param mode The mode of the passcode screen, either passcode creation or passcode verification.
- * @param minPasscodeLength The minimum number of characters the passcode must contain.
+ * @param configData The passcode configuration data used to create or update the passcode.
  */
-- (id)initWithMode:(SFPasscodeControllerMode)mode minPasscodeLength:(NSInteger)minPasscodeLength;
+- (id)initWithMode:(SFPasscodeControllerMode)mode passcodeConfig:(SFPasscodeConfigurationData)configData;
 
 /**
  * Method to be called after the creation of the passcode is confirmed to be successful.
@@ -97,5 +97,18 @@ typedef enum {
  * need to do so.
  */
 - (void)validatePasscodeFailed;
+
+/**
+ * Method returns touch id can be shown
+ * Touch id can only be shown on device that supports it and the passcode has been entered manually since app was launched
+ */
+- (BOOL) canShowTouchId;
+
+/**
+ * Method to bring up touch id to authenticate device owner
+ * If successful, the app will be unlocked
+ * Will do nothing if touch id is supported on the device or the passcode has never been entered manually since app was launched
+ */
+- (void) showTouchId;
 
 @end
