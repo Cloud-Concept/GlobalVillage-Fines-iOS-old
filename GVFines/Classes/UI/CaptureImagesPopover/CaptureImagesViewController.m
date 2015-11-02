@@ -171,7 +171,12 @@
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
-        [self.mainViewController dismissViewControllerAnimated:YES completion:nil];
+        if (self.mainViewController) {
+            [self.mainViewController dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        
     }
 }
 @end

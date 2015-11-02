@@ -81,6 +81,10 @@
 		82BBB5A71793944400374DD8 /* libSalesforceOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82BBB5A61793944400374DD8 /* libSalesforceOAuth.a */; };
 		82BBB5C01793946800374DD8 /* libSalesforceSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82BBB5BF1793946800374DD8 /* libSalesforceSDKCore.a */; };
 		82F6F66A18E4D0280033CACD /* libSalesforceSecurity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82F6F66918E4D0280033CACD /* libSalesforceSecurity.a */; };
+		9D8FB46A1BE635B2009E947C /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8FB4631BE635B2009E947C /* SVIndefiniteAnimatedView.m */; };
+		9D8FB46B1BE635B2009E947C /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9D8FB4651BE635B2009E947C /* SVProgressHUD.bundle */; };
+		9D8FB46C1BE635B2009E947C /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8FB4671BE635B2009E947C /* SVProgressHUD.m */; };
+		9D8FB46D1BE635B2009E947C /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8FB4691BE635B2009E947C /* SVRadialGradientLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -248,8 +252,6 @@
 		82BBB5A41793944400374DD8 /* SFOAuthCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFOAuthCredentials.h; sourceTree = "<group>"; };
 		82BBB5A51793944400374DD8 /* SFOAuthInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFOAuthInfo.h; sourceTree = "<group>"; };
 		82BBB5A61793944400374DD8 /* libSalesforceOAuth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSalesforceOAuth.a; sourceTree = "<group>"; };
-		82BBB5AB1793946800374DD8 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		82BBB5AC1793946800374DD8 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		82BBB5AD1793946800374DD8 /* SalesforceSDKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesforceSDKConstants.h; sourceTree = "<group>"; };
 		82BBB5AF1793946800374DD8 /* SFApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFApplication.h; sourceTree = "<group>"; };
 		82BBB5B01793946800374DD8 /* SFAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAuthenticationManager.h; sourceTree = "<group>"; };
@@ -282,6 +284,26 @@
 		82F6F66718E4D0280033CACD /* SFPasscodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFPasscodeManager.h; sourceTree = "<group>"; };
 		82F6F66818E4D0280033CACD /* SFPasscodeProviderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFPasscodeProviderManager.h; sourceTree = "<group>"; };
 		82F6F66918E4D0280033CACD /* libSalesforceSecurity.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSalesforceSecurity.a; sourceTree = "<group>"; };
+		9D8FB4541BE62282009E947C /* SalesforceSDKCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesforceSDKCore.h; sourceTree = "<group>"; };
+		9D8FB4551BE62282009E947C /* SalesforceSDKCoreDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesforceSDKCoreDefines.h; sourceTree = "<group>"; };
+		9D8FB4561BE62282009E947C /* SalesforceSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesforceSDKManager.h; sourceTree = "<group>"; };
+		9D8FB4571BE62282009E947C /* SFManagedPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFManagedPreferences.h; sourceTree = "<group>"; };
+		9D8FB4581BE62282009E947C /* SFPasscodeViewControllerTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFPasscodeViewControllerTypes.h; sourceTree = "<group>"; };
+		9D8FB4591BE62282009E947C /* SFSDKAppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSDKAppConfig.h; sourceTree = "<group>"; };
+		9D8FB45A1BE62282009E947C /* SFSDKAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSDKAppDelegate.h; sourceTree = "<group>"; };
+		9D8FB45B1BE62282009E947C /* SFSDKTestCredentialsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSDKTestCredentialsData.h; sourceTree = "<group>"; };
+		9D8FB45C1BE62282009E947C /* SFSDKTestRequestListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSDKTestRequestListener.h; sourceTree = "<group>"; };
+		9D8FB45D1BE62282009E947C /* SFSmartStoreInspectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSmartStoreInspectorViewController.h; sourceTree = "<group>"; };
+		9D8FB45E1BE62282009E947C /* SFUserAccountIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFUserAccountIdentity.h; sourceTree = "<group>"; };
+		9D8FB45F1BE62282009E947C /* TestSetupUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSetupUtils.h; sourceTree = "<group>"; };
+		9D8FB4621BE635B2009E947C /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		9D8FB4631BE635B2009E947C /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		9D8FB4641BE635B2009E947C /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		9D8FB4651BE635B2009E947C /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		9D8FB4661BE635B2009E947C /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		9D8FB4671BE635B2009E947C /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		9D8FB4681BE635B2009E947C /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		9D8FB4691BE635B2009E947C /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +395,7 @@
 		13545BD919D7FCCA0056EF73 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9D8FB4601BE635B2009E947C /* Lib */,
 				6610871B1BC2967000064585 /* MJpopup */,
 				13AB270A19FF9E7B008CB1FA /* CaptureImagesPopover */,
 				130C43EC19F4DB6000B188D8 /* CustomIOS7AlertView */,
@@ -874,8 +897,18 @@
 		82BBB5AA1793946800374DD8 /* SalesforceSDKCore */ = {
 			isa = PBXGroup;
 			children = (
-				82BBB5AB1793946800374DD8 /* FMDatabase.h */,
-				82BBB5AC1793946800374DD8 /* FMResultSet.h */,
+				9D8FB4541BE62282009E947C /* SalesforceSDKCore.h */,
+				9D8FB4551BE62282009E947C /* SalesforceSDKCoreDefines.h */,
+				9D8FB4561BE62282009E947C /* SalesforceSDKManager.h */,
+				9D8FB4571BE62282009E947C /* SFManagedPreferences.h */,
+				9D8FB4581BE62282009E947C /* SFPasscodeViewControllerTypes.h */,
+				9D8FB4591BE62282009E947C /* SFSDKAppConfig.h */,
+				9D8FB45A1BE62282009E947C /* SFSDKAppDelegate.h */,
+				9D8FB45B1BE62282009E947C /* SFSDKTestCredentialsData.h */,
+				9D8FB45C1BE62282009E947C /* SFSDKTestRequestListener.h */,
+				9D8FB45D1BE62282009E947C /* SFSmartStoreInspectorViewController.h */,
+				9D8FB45E1BE62282009E947C /* SFUserAccountIdentity.h */,
+				9D8FB45F1BE62282009E947C /* TestSetupUtils.h */,
 				82E3B3E8193D555800B70864 /* NSURL+SFStringUtils.h */,
 				82BBB5AD1793946800374DD8 /* SalesforceSDKConstants.h */,
 				82E3B3E9193D555800B70864 /* SFAbstractPasscodeViewController.h */,
@@ -941,6 +974,29 @@
 			path = SalesforceSecurity;
 			sourceTree = "<group>";
 		};
+		9D8FB4601BE635B2009E947C /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				9D8FB4611BE635B2009E947C /* SVProgressHUD */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		9D8FB4611BE635B2009E947C /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				9D8FB4621BE635B2009E947C /* SVIndefiniteAnimatedView.h */,
+				9D8FB4631BE635B2009E947C /* SVIndefiniteAnimatedView.m */,
+				9D8FB4641BE635B2009E947C /* SVProgressHUD-Prefix.pch */,
+				9D8FB4651BE635B2009E947C /* SVProgressHUD.bundle */,
+				9D8FB4661BE635B2009E947C /* SVProgressHUD.h */,
+				9D8FB4671BE635B2009E947C /* SVProgressHUD.m */,
+				9D8FB4681BE635B2009E947C /* SVRadialGradientLayer.h */,
+				9D8FB4691BE635B2009E947C /* SVRadialGradientLayer.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -971,7 +1027,7 @@
 				ORGANIZATIONNAME = CloudConcept;
 				TargetAttributes = {
 					824A9DD41724E16400C9BD79 = {
-						DevelopmentTeam = CSS2DLH755;
+						DevelopmentTeam = 267L2X628Y;
 						SystemCapabilities = {
 							com.apple.WAC = {
 								enabled = 1;
@@ -1021,6 +1077,7 @@
 				66A1986F1BE10A7200656F09 /* ReissueViewController.xib in Resources */,
 				134CE53B19ED357300F80649 /* ExistingFinesViewController.xib in Resources */,
 				669A65201BA824390012BC7D /* CaseDetailsViewController.xib in Resources */,
+				9D8FB46B1BE635B2009E947C /* SVProgressHUD.bundle in Resources */,
 				1327655419D966F600E84F4F /* PopoverPickerViewController.xib in Resources */,
 				13AB270F19FF9E93008CB1FA /* CaptureImagesViewController.xib in Resources */,
 				824A9FE61725079100C9BD79 /* LICENSE in Resources */,
@@ -1052,11 +1109,14 @@
 				824A9E331724E2A900C9BD79 /* AppDelegate.m in Sources */,
 				66A1986E1BE10A7200656F09 /* ReissueViewController.m in Sources */,
 				669A65111BA042970012BC7D /* CaseTableViewCell.m in Sources */,
+				9D8FB46C1BE635B2009E947C /* SVProgressHUD.m in Sources */,
 				1362056119DC268E00313E2E /* HelperClass.m in Sources */,
 				1379C73319EBE68C004ADC6C /* SubCategory.m in Sources */,
 				13AB271419FFA3DA008CB1FA /* ImagesCollectionViewCell.m in Sources */,
+				9D8FB46A1BE635B2009E947C /* SVIndefiniteAnimatedView.m in Sources */,
 				669A65081B9EC3FF0012BC7D /* ExistingCasesViewController.m in Sources */,
 				824A9E3A1724E58200C9BD79 /* InitialViewController.m in Sources */,
+				9D8FB46D1BE635B2009E947C /* SVRadialGradientLayer.m in Sources */,
 				1379C73619EBE6F2004ADC6C /* PavilionFineType.m in Sources */,
 				134CE53A19ED357300F80649 /* ExistingFinesViewController.m in Sources */,
 				13B9379719ED518A000559FC /* FineTableViewCell.m in Sources */,
@@ -1090,6 +1150,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_TESTABILITY = YES;
@@ -1123,6 +1184,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

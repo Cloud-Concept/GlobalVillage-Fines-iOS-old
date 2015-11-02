@@ -7,6 +7,7 @@
 //
 
 #import "ReissueViewController.h"
+#import "SVProgressHUD.h"
 
 @interface ReissueViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *commentsView;
@@ -43,8 +44,8 @@
     [self.delegate closeFineDetailsPopup];
 }
 - (IBAction)printClicked:(id)sender {
-        //[self initializeAndStartActivityIndicatorSpinner];
-        
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:@"Loading..."];
         NSString *newStatus = @"";
         NSString *ownerId = @"";
         //        UIAlertController *addImages = [UIAlertController alertControllerWithTitle:@"More Images" message:@"Do went to upload more images?" preferredStyle:UIAlertControllerStyleAlert];
@@ -188,12 +189,14 @@
         if (![self.fine.Status isEqualToString:@"Rectified"])
             [HelperClass printReceiptForFine:self.fine];
         [self.delegate didFinishUpdatingFine];
+         [SVProgressHUD dismiss];
     });
 }
 
 - (void)request:(SFRestRequest *)request didFailLoadWithError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         //[self stopActivityIndicatorSpinner];
+         [SVProgressHUD dismiss];
         [HelperClass messageBox:@"An error occured while updating the fine." withTitle:@"Error"];
     });
 }
